@@ -3,6 +3,7 @@ import { useDispatchCart, useCart } from '../components/ContextReducer'
 export default function Cart() {
     const data = useCart();
     const dispatch = useDispatchCart();
+    // eslint-disable-next-line
     if (data == 0) {
 
         return <div className='m-5 text-center w-100 fs-5 text-white'>Cart Is Empty</div>
@@ -58,7 +59,8 @@ export default function Cart() {
                                         <td>{food.qty}</td>
                                         <td>{food.size}</td>
                                         <td>{food.price}</td>
-                                        <td><button type='button' className='btn p-0'><img src="" alt='delete' onClick={() => { dispatch({ type: "REMOVE", index: index }) }}></img>dlt</button></td>
+                                        {/* <td><button type='button' className='btn p-0'><img src="" alt='delete' onClick={() => { dispatch({ type: "REMOVE", index: index }) }}></img></button></td> */}
+                                        <td><button type='button' className='btn bg-success py-1 text-center' style={{textAlign:'center', fontWeight:'bold'}} onClick={() => { dispatch({ type: "REMOVE", index: index }) }}>Remove</button></td>
                                     </tr>
                                 )
                             })

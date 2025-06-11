@@ -18,9 +18,9 @@ export default function Navbar() {
     return (
         <div>
 
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-danger ">
                 <div className="container-fluid">
-                    <Link className="navbar-brand fs-1 fst-italic" to="#">GoFood</Link>
+                    <Link className="navbar-brand fs-1 fst-italic" to="#">Click It</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -47,6 +47,7 @@ export default function Navbar() {
                                 <div>
                                     <div className="btn btn bg-white text-success mx-2 " onClick={()=>setCartView(true)}> My Cart  {' '}
                                         <Badge pill bg="danger">{
+                                            // eslint-disable-next-line
                                             lnt==0? '':lnt.length}</Badge>
                                     </div>
                                     {
