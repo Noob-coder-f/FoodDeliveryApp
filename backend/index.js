@@ -3,6 +3,15 @@ const app=express();
 const port=5000;
 
 
+const cors = require("cors");
+
+app.use(cors({
+  origin: ["http://localhost:3000", "https://food-delivery-app-git-main-mohd-faaishals-projects.vercel.app", "https://food-delivery-4gwp0y0au-mohd-faaishals-projects.vercel.app"],
+  credentials: true
+}));
+
+
+
 //connection bnnae ke liye connectdb function bnaye h db.js me
 const connectdb=require('./db');
 

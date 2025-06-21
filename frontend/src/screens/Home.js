@@ -131,8 +131,19 @@ export default function Home() {
   const [foodcat, setFoodcat] = useState([]);
 
   const loadData = async () => {
+    console.log("API Base URL:", process.env.REACT_APP_API_URL);
+
     try {
-      const response = await fetch("http://localhost:5000/api/fooditem", {
+      // ❌ OLD HARDCODED LOCALHOST URL (Only works locally)
+      // const response = await fetch("http://localhost:5000/api/fooditem", {
+      //   method: "POST",
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // });
+
+      // ✅ NEW CODE: Uses environment variable (works on Vercel + local)
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/fooditem`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
