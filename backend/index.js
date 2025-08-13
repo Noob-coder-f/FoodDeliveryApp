@@ -1,35 +1,43 @@
-const express= require('express');
-const app=express();
-const port=5000;
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 5000;
 
+// Allow both localhost and your Vercel frontend
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://food-delivery-app-git-main-mohd-faaishals-projects.vercel.app'
+];
 
-//connection bnnae ke liye connectdb function bnaye h db.js me
-const connectdb=require('./db');
+app.use(cors({
+  origin: function(origin, callback){
+    // allow requests with no origin like Postman
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-allow-Origin","http://localhost:3000");
-    res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Origin,x-Requested-With,Content-Type, Accept"
-    );
-    next();
+// Parse JSON
+app.use(express.json());
 
-})
-
+// Connect to DB
+const connectdb = require('./db');
 connectdb();
 
+// Routes
+app.use('/api', require("./Routes/CreateUser"));
+app.use('/api', require("./Routes/DisplayData"));
+app.use('/api', require("./Routes/OrderData"));
 
-
-app.use(express.json())
-app.use('/api',require("./Routes/CreateUser"));
-app.use('/api',require("./Routes/DisplayData"));
-app.use('/api',require("./Routes/OrderData"));
-
-
-app.get('/',(req,res)=>{
-    res.send("Hello Faishal")
+// Test route
+app.get('/', (req, res) => {
+  res.send("Hello Faishal");
 });
 
-app.listen(port ,()=>{
-    console.log(`Server is running on ${port}`)
+app.listen(port, () => {
+  console.log(`Server is running on ${port}`);
 });
